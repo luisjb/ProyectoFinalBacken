@@ -19,7 +19,6 @@ router.get("/", (req, res) => {
     res.json(products);
 });
 
-// GET product by id
 router.get("/:pid", (req, res) => {
     const products = JSON.parse(fs.readFileSync(PRODUCTS_DB_FILE));
     const product = products.find((p) => p.id === parseInt(req.params.pid));
@@ -30,7 +29,6 @@ router.get("/:pid", (req, res) => {
     }
 });
 
-// POST new product
 router.post("/", (req, res) => {
     const newProduct = {
         id: Date.now(),
@@ -50,27 +48,22 @@ router.post("/", (req, res) => {
         return res.status(409).send("Product with same code already exists");
     }
 
-  // Add new product to list
     products.push(newProduct);
 
-  // Write updated products file
     fs.writeFileSync(PRODUCTS_DB_FILE, JSON.stringify(products));
 
     res.json(newProduct);
 });
 
-// PUT update product by id
 router.put("/:pid", (req, res) => {
     const productId = parseInt(req.params.pid);
     const products = JSON.parse(fs.readFileSync(PRODUCTS_DB_FILE));
 
-  // Find product with given id
     const index = products.findIndex((p) => p.id === productId);
     if (index === -1) {
         return res.status(404).send("Product not found");
     }
 
-  // Update product fields
     const updatedProduct = {
         id: productId,
         title: req.body.title,
@@ -84,26 +77,21 @@ router.put("/:pid", (req, res) => {
     };
     products[index] = updatedProduct;
 
-  // Write updated products file
     fs.writeFileSync(PRODUCTS_DB_FILE, JSON.stringify(products));
 
     res.json(updatedProduct);
 });
 
-// DELETE product by id
 router.delete("/:pid", (req, res) => {
     const productId = parseInt(req.params.pid);
     const products = JSON.parse(fs.readFileSync(PRODUCTS_DB_FILE));
 
-  // Filter out product with given id
     const filteredProducts = products.filter((p) => p.id !== productId);
 
-  // Check if product was actually deleted
     if (filteredProducts.length === products.length) {
         return res.status(404).send("Product not found");
     }
 
-  // Write updated products file
     fs.writeFileSync(PRODUCTS_DB_FILE, JSON.stringify(filteredProducts));
 
     res.sendStatus(204);

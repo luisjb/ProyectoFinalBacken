@@ -7,7 +7,6 @@ const router = express.Router();
 const CARTS_DB = './carrito.json';
 const PRODUCTS_DB = './productos.json';
 
-// Crear un nuevo carrito
 router.post('/', async (req, res) => {
     try {
         const { id } = req.body;
@@ -24,7 +23,6 @@ router.post('/', async (req, res) => {
     }
 });
 
-// Listar los productos de un carrito
 router.get('/:cid', async (req, res) => {
     try {
         const carts = JSON.parse(await fs.readFile(CARTS_DB, 'utf-8'));
@@ -45,7 +43,6 @@ router.get('/:cid', async (req, res) => {
     }
 });
 
-// Agregar un producto a un carrito
 router.post('/:cid/product/:pid', async (req, res) => {
     try {
         const carts = JSON.parse(await fs.readFile(CARTS_DB, 'utf-8'));
