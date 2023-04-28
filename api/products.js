@@ -1,7 +1,8 @@
 import fs from 'fs';
 import crypto from 'crypto';
+import { EventEmitter } from 'events';
 
-class Products {
+class Products extends EventEmitter {
     constructor(path) {
         this.path = path; // Ruta archivo registro productos
         this.latestId = 1;
