@@ -9,9 +9,8 @@ const PRODUCTS_DB = './productos.json';
 
 router.post('/', async (req, res) => {
     try {
-        const { id } = req.body;
         const carrito = {
-            id: id || uuidv4(),
+            id: uuidv4(),
             timestamp: Date.now(),
             products: []
         };
