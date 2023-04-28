@@ -42,4 +42,17 @@ io.on('connection', (socket) => {
     socket.on('event_cl01', (data) => {
         console.log(data);
     });
+    // Listener para agregar producto
+    socket.on('addProduct', async (product) => {
+        await Products.addProduct(product);
+        const products = await Products.getProducts();
+        io.of('/realtimeproducts').emit('productListUpdated', products);
+    });
+
+    // Listener para borrar producto
+    socket.on('deleteProduct', async (productId) => {
+        await Products.deleteProduct(productId);
+        const products = await Products.getProducts();
+        io.of('/realtimeproducts').emit('productListUpdated', products);
+    });
 });

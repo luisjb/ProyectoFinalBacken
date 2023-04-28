@@ -1,0 +1,26 @@
+<!-- views/home.handlebars -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Home</title>
+    </head>
+    <body>
+        <h1>Lista de productos</h1>
+        <ul>
+        {{#each products}}
+            <li>{{this.name}} - {{this.price}}</li>
+        {{/each}}
+        </ul>
+    </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.1/socket.io.js"></script>
+    <script>
+        const ws = io('ws://localhost:3050');
+        ws.on('connect', () => { 
+            ws.emit('event_cl01', 'Este es el primer mensaje desde el cliente 01');
+            ws.on('server_confirm', (msg) => {
+                console.log(msg);
+            });
+        })
+    </script>
+</html>

@@ -1,0 +1,44 @@
+<!-- views/realTimeProducts.handlebars -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Real-time Products</title>
+    </head>
+    <body>
+        <h1>Lista de productos</h1>
+        <ul id="product-list">
+        {{#each products}}
+            <li>{{this.name}} - {{this.price}}</li>
+        {{/each}}
+        </ul>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.1/socket.io.js"></script>
+        <script>
+        const socket = io();
+        const productList = document.querySelector('#product-list');
+
+        socket.on('new-product', (product) => {
+            const li = document.createElement('li');
+            li.innerText = `${product.name} - ${product.price}`;
+            productList.appendChild(li);
+        });
+
+        socket.on('delete-product', (id) => {
+            const li = productList.querySelector(`[data-id="${id}"]`);
+            li.remove();
+        });
+        </script>
+        <script>
+        const ws = io('ws://localhost:3050');
+
+            ws.on('connect', () => { 
+                ws.emit('event_product', 'Este es un mensaje de producto');
+
+                ws.on('server_confirm', (msg) => {
+                    console.log('El servidor ha confirmado la conexión');
+                });
+            })
+        </script>
+    </body>
+</html>

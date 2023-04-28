@@ -1,16 +1,30 @@
 {
   "name": "proyecto-final",
   "version": "1.0.0",
-  "description": "",
+  "type": "module",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",
+    "express-handlebars": "^7.0.7",
+    "handlebars": "^4.7.7",
+    "socket.io": "^4.6.1",
     "uuid": "^9.0.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luisjb/ProyectoFinalBacken.git"
+  },
+  "bugs": {
+    "url": "https://github.com/luisjb/ProyectoFinalBacken/issues"
+  },
+  "homepage": "https://github.com/luisjb/ProyectoFinalBacken#readme",
+  "description": ""
 }

@@ -1,10 +1,10 @@
 import { Router } from "express";
 import Products from './products.js';
-import { __dirname } from '../../utils.js';
+import { __dirname } from '../utils.js';
+import fs from "fs";
 
 const router = Router();
 const manager = new Products(`${__dirname}/productos.json`);
-const fs = require("fs");
 
 const PRODUCTS_DB_FILE = './productos.json';
 
@@ -79,4 +79,4 @@ router.delete("/:pid", async (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;
