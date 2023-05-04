@@ -1,8 +1,10 @@
-const express = require('express');
-const fs = require('fs/promises');
-const { v4: uuidv4 } = require('uuid');
+import express from 'express';
+import fs  from 'fs';
+import { v4 as uuidv4 } from 'uuid';
+
 
 const router = express.Router();
+
 
 const CARTS_DB = './carrito.json';
 const PRODUCTS_DB = './productos.json';
@@ -68,4 +70,4 @@ router.post('/:cid/product/:pid', async (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;

@@ -23,7 +23,7 @@ router.get("/", async (req, res) => {
 
 router.get("/:pid", async (req, res) => {
     try{
-        const product = await manager.getProductById(req.body);    
+        const product = await manager.getProductById(req.params.pid);    
         //const products = products.find((p) => p.id === parseInt(req.params.pid));
         if (product) {
             res.json(product);

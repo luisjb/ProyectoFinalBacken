@@ -1,5 +1,6 @@
 import express from "express";
 import products from './api/ProductManager.js';
+import carts from './api/carts.js';
 import { __dirname } from './utils.js';
 import { engine } from 'express-handlebars';
 import { Server } from 'socket.io';
@@ -18,7 +19,7 @@ server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
 
 server.use('/api', products);
-
+server.use('/api', carts)
 server.use('/public', express.static(`${__dirname}/public`));
 
 server.engine('handlebars', engine());
